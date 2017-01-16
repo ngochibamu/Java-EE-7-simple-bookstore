@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h1>Upload Data</h1>
+		<div class="form-group">
+		<h:form id="uploadForm" enctype="multipart/form-data">
+			<h:inputFile value="#{bookstoreController.bookstoreData}" />
+			<h:commandButton action="#{bookstoreController.importBookstoreData}"
+				value="Import">
+				<f:ajax execute="@all" render="@all" onevent="statusUpdate" />
+			</h:commandButton>
+		</h:form>
+		</div>
+		<h1>Bookstore Data</h1>
+			<h:messages styleClass="messages" style="list-style: none; padding:0; margin:0;" errorClass="alert alert-error" infoClass="alert alert-success"
+				warnClass="alert alert-warning" globalOnly="true" />
+			<div class="panel-body">
+				
+				<h:panelGrid columns="1" border="0" styleClass="smoke" rendered="#{!bookstoreController.edit and not empty books}">
+					<h:form>
+						<h:dataTable var="_book" value="#{books}" styleClass="table table-hover table-striped">
+							<h:column>
+								<f:facet name="header">Id</f:facet>
+								#{_book.id}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Category</f:facet>
+								#{_book.category.title}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Title</f:facet>
+								#{_book.title}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Langauge</f:facet>
+								#{_book.language}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Price</f:facet>
+								#{_book.price}
+							</h:column>
+							<h:column class="btn btn-primary">
+								<f:facet name="header">Action</f:facet>
+								<h:commandButton action="#{bookstoreController.editBook(_book)}" value="Edit" />
+								<h:commandButton action="#{bookstoreController.deleteBook(_book)}" value="Delete" />
+							</h:column>
+						</h:dataTable>
+					</h:form>
+				</h:panelGrid>
+				<h:panelGroup rendered="#{empty books}">
+					<p>No books found in database</p>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{bookstoreController.edit}">
+					<h1>Edit Book: #{book.title}</h1>
+					<h:form role="form">
+						<div class="form-group">
+							<h:outputLabel value="Title" for="title" styleClass="control-label" />
+							<h:inputText value="#{bookstoreController.book.title}"  />
+						</div>
+						<div class="form-group">							
+							<h:outputLabel value="Language" for="lang" styleClass="control-label" />
+							<h:inputText value="#{bookstoreController.book.language}"  />
+						</div>
+						<div class="form-group">
+							<h:outputLabel value="Price" for="price" styleClass="control-label" />
+							<h:inputText value="#{bookstoreController.book.price}"  />
+						</div>
+						<div class="form-group">
+							<h:commandButton id="Save" action="#{bookstoreController.saveBook()}" value="Save" styleClass="btn btn-primary" />
+						</div>
+						<h:messages styleClass="messages" style="list-style:none; padding:0; margin:0;" errorClass="alert alert-error" 
+						infoClass="alert alert-success" warnClass="alert alert-warning" globalOnly="true"/>
+					</h:form>
+				</h:panelGroup>
+			</div>
+	</ui:define>
+</ui:composition>

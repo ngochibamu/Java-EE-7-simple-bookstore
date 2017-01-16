@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Bookstore</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap-theme.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="font-awesome/4.5.0/css/font-awesome.min-jsf.css" />
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+<h:body>
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<h:link outcome="/index" class="navbar-brand"
+					value="Book Store" />
+			</div>
+			<div class="collapse navbar-collapse"></div>
+		</div>
+	</div>
+	<div class="container">
+		<ui:insert name="content">
+
+		</ui:insert>
+		<hr />
+
+	</div>
+	<!-- load js at bottom for faster loading-->
+    <h:outputScript library="webjars" name="jquery/2.1.4/jquery.min.js"/>
+    <h:outputScript library="webjars" name="bootstrap/3.3.6/js/bootstrap.min.js" />
+</h:body>
+</html>
